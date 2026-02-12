@@ -110,17 +110,7 @@ const yeniSifreyiKaydet = async(req,res,next)=>{
         }catch (err) {
                     req.flash('error','Error, please try again');
                     res.redirect('/login');
-        }
-
-
-
-
-
-
-
-
-
-        
+        }        
     };
 
 };

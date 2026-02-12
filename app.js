@@ -71,15 +71,18 @@ app.use(passport.session());
 //routers
 
 const authRouter=require('./src/routers/auth_router');
+const mainRouter=require('./src/routers/main_router');
 const yonetimRouter=require('./src/routers/yonetim_router');
 
 
+/*
 app.get('/', (req, res) => {
     res.json({mesaj:'Merhaba'});
-});
+});*/
 
-app.use('/', authRouter);
-app.use('/yonetim', yonetimRouter);
+app.use('/', mainRouter);
+//app.use('/', authRouter);
+//app.use('/yonetim', yonetimRouter);
 
 app.listen(process.env.PORT,() => {
     console.log(`Server is running on port ${process.env.PORT}`);
