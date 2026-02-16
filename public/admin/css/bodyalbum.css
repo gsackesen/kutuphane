@@ -1,0 +1,29 @@
+
+.cover-img {
+  width: 270px;
+  height: 210px;
+  margin-top: 5px;
+  align-self: center;
+  object-fit: none;
+  
+}
+.button-margin {
+  margin: 2px;
+}
+
+.btn{
+        padding: 0;
+        border:0;
+        outline: none;
+        font-size: 1.5rem;
+}
+
+.btn--view{
+    color: rgb(0, 4, 255) ;  
+}
+
+.btn--edit{
+    color: green;
+}
+
+            

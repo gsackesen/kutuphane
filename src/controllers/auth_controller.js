@@ -115,7 +115,7 @@ const yeniSifreyiKaydet = async(req,res,next)=>{
 
 };
 const loginFormuGoster = (req,res,next)=>{
-    res.render('login',{layout:'./layout/auth_layout.ejs'});
+    res.render('login',{layout:'./layout/main_layout.ejs'});
     
 };
 const login= (req,res,next)=>{
@@ -130,7 +130,7 @@ const login= (req,res,next)=>{
         res.redirect('/login');        
     } else {
         passport.authenticate('local', {
-                successRedirect:'/yonetim',
+                successRedirect:'/',
                 failureRedirect: '/login',                
                 failureFlash: true ,
         })(req,res,next);   

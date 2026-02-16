@@ -1,12 +1,12 @@
 const User= require('../models/user_model');
 
 const anaSayfayiGoster = function(req,res,next){
-    res.render('index',{layout:'./layout/yonetim_layout.ejs'});
+    res.render('index',{layout:'./layout/main_layout.ejs'});
 }
 
 const profilSayfasiniGoster = function(req,res,next){
 
-    res.render('profil',{user:req.user,layout:'./layout/yonetim_layout.ejs'});
+    res.render('profil',{user:req.user,layout:'./layout/main_layout.ejs'});
 }
 
 
@@ -26,7 +26,7 @@ const profilGuncelle = async function(req,res,next){
            // req.flash('success_message',[{msg:'Profil güncellendi'}]);
           // console.log('update tamamlandı');
           // res.render('profil',{user:req.user,layout:'./layout/yonetim_layout.ejs'});
-          res.redirect("/yonetim/profil");
+          res.redirect("/profil");
         };
        
         

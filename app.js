@@ -81,8 +81,8 @@ app.get('/', (req, res) => {
 });*/
 
 app.use('/', mainRouter);
-//app.use('/', authRouter);
-//app.use('/yonetim', yonetimRouter);
+app.use('/', authRouter);
+app.use('/yonetim', yonetimRouter);
 
 app.listen(process.env.PORT,() => {
     console.log(`Server is running on port ${process.env.PORT}`);
