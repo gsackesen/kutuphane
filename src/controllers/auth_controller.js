@@ -140,7 +140,7 @@ const login= (req,res,next)=>{
 };
 
 const forgetPasswordFormuGoster = (req,res,next)=>{
-    res.render('forget_password',{layout:'./layout/auth_layout.ejs'});
+    res.render('forget_password',{layout:'./layout/main_layout.ejs'});
 };
 
 const forgetPassword = async(req,res,next)=>{
@@ -214,7 +214,7 @@ const forgetPassword = async(req,res,next)=>{
 
 const registerFormuGoster = (req,res,next)=>{
     //console.log(req.flash('validation_error'));
-    res.render('register',{layout:'./layout/auth_layout.ejs'});
+    res.render('register',{layout:'./layout/main_layout.ejs'});
 };
 
 const register = async (req,res,next)=>{
