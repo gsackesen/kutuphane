@@ -12,8 +12,13 @@ const jwt = require('jsonwebtoken');
 const menuGoster = (req,res,next)=>{
     res.render('index',{layout:'./layout/main_layout.ejs'});
     
-};
+};/*
+const profilSayfasiniGoster = function(req,res,next){
+
+    res.render('profil',{user:req.user,layout:'./layout/main_layout.ejs'});
+}*/
 
 module.exports = {
-    menuGoster,    
+    menuGoster,
+   // profilSayfasiniGoster,    
 };

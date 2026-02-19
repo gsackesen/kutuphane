@@ -1,9 +1,10 @@
 const User= require('../models/user_model');
 
+/*
 const anaSayfayiGoster = function(req,res,next){
     res.render('index',{layout:'./layout/main_layout.ejs'});
 }
-
+*/
 const profilSayfasiniGoster = function(req,res,next){
 
     res.render('profil',{user:req.user,layout:'./layout/main_layout.ejs'});
@@ -38,7 +39,7 @@ const profilGuncelle = async function(req,res,next){
 }
 
 module.exports={
-    anaSayfayiGoster,
+  //  anaSayfayiGoster,
     profilSayfasiniGoster,
     profilGuncelle
 }

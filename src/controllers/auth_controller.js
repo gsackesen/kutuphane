@@ -303,6 +303,7 @@ const register = async (req,res,next)=>{
 };
 
 const logout= async (req, res,next)=>{
+    
    /* req.logout(function(err) {
         if (err) { return next(err); }        
       });      

@@ -1,59 +1,70 @@
-<div class="wrapper bg-white mt-sm-5">
-    <form action="/yonetim/profil-guncelle" method="post" enctype="multipart/form-data">    
-    <h4 class="pb-4 border-bottom">Profile</h4>
-    <div class="d-flex align-items-start py-3 border-bottom">
-        <img src="/uploads/avatars/<%- user.avatar  %>" class="img" alt="" width="300" height="300">
-        <div class="pl-sm-4 pl-2" id="img-section">
-            <b>Profile Photo</b>
-            <p>Accepted file type .png. Less than 1MB</p>
-            <input type="file" name="avatar"class="btn button border"><b></b></input>            
-        </div>
-    </div>
-    <div class="py-2">
-        <div class="row py-2">
-            <div class="col-md-6">
-                <label for="firstname">First Name</label>
-                <input type="text" name="ad" value="<%- user.ad %>" class="bg-light form-control" placeholder="Steve">
-            </div>
-            <div class="col-md-6 pt-md-0 pt-3">
-                <label for="lastname">Last Name</label>
-                <input type="text" name="soyad" value="<%- user.soyad %>" class="bg-light form-control" placeholder="Smith">
-            </div>
-        </div>
-        <div class="row py-2">
-            <div class="col-md-6">
-                <label for="mail">Email Address</label>
-                <input type="text" name="mail" value="<%- user.mail %>"class="bg-light form-control" readonly placeholder="steve_@email.com">
-            </div>
-            
-        </div>
-        <div class="row py-2">
-            
-            <div class="col-md-6 pt-md-0 pt-3" id="lang">
-                <label for="language">Language</label>
-                <div class="arrow">
-                    <select name="language" id="language" class="bg-light">
-                        <option value="english" selected>English</option>
-                        <option value="english_us">English (United States)</option>
-                        <option value="enguk">English UK</option>
-                        <option value="arab">Turkish</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="py-3 pb-4 border-bottom">
-            <button type="submit" class="btn btn-primary mr-3">Save Changes</button>
-            <button class="btn border button">Cancel</button>
-        </div>
-    </form>
-        <div class="d-sm-flex align-items-center pt-3" id="deactivate">
-            <div>
-                <b>Deactivate your account</b>
-                <p>Details about your company account and password</p>
-            </div>
-            <div class="ml-auto">
-                <button class="btn danger">Deactivate</button>
+ 
+<div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <form action="/profil-guncelle" method="post" enctype="multipart/form-data">    
+                    <h2 class="border-bottom text-center fw-semibold">Profile</h2>
+                    <div class="d-flex align-items-start py-3 border-bottom ">
+                        <img src="/uploads/avatars/<%- user.avatar  %>" class="rounded-circle" alt="" width="150" height="150" >
+                        <div class="col-md-1"></div>                        
+                         <div class="row">
+                            <h5>Profile Photo</h5>
+                            <p>Accepted file type .png. Less than 1MB</p> 
+                            <div class="input-group input-group-sm mb-3" id="img-section">
+                                <input type="file" name="avatar" class="btn button border"><b></b></input> 
+                                        
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="py-2" style="margin: 5px;">
+                        <div class="row py-2">
+                            <div class="col-md-6">
+                                <label for="firstname">First Name</label>
+                                <input type="text" name="ad" value="<%- user.ad %>" class="bg-light form-control" placeholder="Steve">
+                            </div>
+                            <div class="col-md-6 pt-md-0 pt-3">
+                                <label for="lastname">Last Name</label>
+                                <input type="text" name="soyad" value="<%- user.soyad %>" class="bg-light form-control" placeholder="Smith">
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-6">
+                                <label for="mail">Email Address</label>
+                                <input type="text" name="mail" value="<%- user.mail %>"class="bg-light form-control" readonly placeholder="steve_@email.com">
+                            </div>
+                            
+                        </div>
+                        <div class="row py-2">
+                            
+                            <div class="col-md-6 pt-md-0 pt-3" id="lang">
+                                <label for="language">Language</label>
+                                <div class="arrow">
+                                    <select name="language" id="language" class="bg-light">
+                                        <option value="english" selected>English</option>
+                                        <option value="english_us">English (United States)</option>
+                                        <option value="enguk">English UK</option>
+                                        <option value="arab">Turkish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-3 pb-4 border-bottom">
+                            <button type="submit" class="btn btn-primary mr-3">Save Changes</button>
+                            <button class="btn border button">Cancel</button>
+                        </div>
+                </form>
+                <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                    <div>
+                        <b>Deactivate your account</b>
+                        <p>Details about your company account and password</p>
+                    </div>
+                    <div class="ml-auto">
+                        <button class="btn danger">Deactivate</button>
+                    </div>
+                </div>    
             </div>
         </div>
     </div>
 </div>
+

@@ -251,17 +251,16 @@
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
           >
             <a
-              href="#"
-              class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
-            >
+              href="\"
+              class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
               <svg
                 class="bi me-2"
                 width="40"
                 height="32"
                 role="img"
                 aria-label="Bootstrap"
-              >
-               <image x="0" y="0" width="40px" height="32px" xlink:href="/admin/img/libimage.png"/>                
+              >                
+              <image x="0" y="0" width="40px" height="32px" xlink:href="/admin/img/libimage.png"/>                
               </svg>
             </a>
             <ul
@@ -313,10 +312,10 @@
               <ul class="dropdown-menu text-small">
                 <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
                 <li><a class="dropdown-item" href="/login">Sign in</a></li>
-                <li><a class="dropdown-item" href="/yonetim/profile">Administratiom</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="/profile">Administratiom</a></li>
+                <li><a class="dropdown-item" href="/profil">Profile</a></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal" >Sign out</a></li>
               </ul>
             </div>
           </div>
@@ -328,6 +327,25 @@
   <body>  
         <%- body %>
     <!-- Buraya ana ekran görüntüleri gelecek-->
+
+    <!-- Logout Modal-->
+      <div class="modal" id="logoutModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Ready to Leave?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Select "Logout" below if you are ready to end your current session.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <a class="btn btn-primary" href="/logout"> Logout </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <script
       src= "/admin/js/bootstrap.bundle.min.js"
