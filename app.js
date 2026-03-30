@@ -7,16 +7,28 @@ const session= require('express-session');
 const app = express();
 const flash = require('connect-flash');
 const passport = require('passport');
+const i18n = require('i18n');
 
 //env değişkenlerini okuma
 require('dotenv').config();
 
+// Configure i18n
+i18n.configure({
+    locales: ['en', 'tr'], // Supported languages
+    directory: path.join(__dirname, './src/locales'),
+    defaultLocale: 'en',
+    queryParameter: 'lang', // Change language via ?lang=xx
+    autoReload: true,
+    updateFiles: false
+});
+
 //template engine ayarları
 app.use(express.static('public'));
+app.use(i18n.init);
 app.use("/uploads", express.static(path.join(__dirname,'src/uploads')));
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, './src/views'));
-app.set('layout', false);
+app.set('layouts', false);
 app.use(expressLayouts);
 app.use(express.json());
 

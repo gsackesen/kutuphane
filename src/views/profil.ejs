@@ -4,67 +4,96 @@
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <form action="/profil-guncelle" method="post" enctype="multipart/form-data">    
-                    <h2 class="border-bottom text-center fw-semibold">Profile</h2>
+                    <h2 class="border-bottom text-center fw-semibold"><%= __('profile') %></h2>
                     <div class="d-flex align-items-start py-3 border-bottom ">
-                        <img src="/uploads/avatars/<%- user.avatar  %>" class="rounded-circle" alt="" width="150" height="150" >
+                        <img src="/uploads/avatars/<%- user.avatar  %>" class="rounded-circle" alt="" width="150" height="150" style="margin-left: 10px;"> 
                         <div class="col-md-1"></div>                        
                          <div class="row">
-                            <h5>Profile Photo</h5>
-                            <p>Accepted file type .png. Less than 1MB</p> 
+                            <h5><%= __('pphoto') %></h5>
+                            <p><%= __('pinfo') %></p> 
                             <div class="input-group input-group-sm mb-3" id="img-section">
-                                <input type="file" name="avatar" class="btn button border"><b></b></input> 
-                                        
+                                <input type="file" name="avatar" class="btn button border"><b></b></input>                                        
                             </div>
                         </div>                        
                     </div>
-                    <div class="py-2" style="margin: 5px;">
+                    <div class="py-2" style="margin: 5px;margin-left: 10px;">
                         <div class="row py-2">
                             <div class="col-md-6">
-                                <label for="firstname">First Name</label>
+                                <label for="firstname"><%= __('name') %></label>
                                 <input type="text" name="ad" value="<%- user.ad %>" class="bg-light form-control" placeholder="Steve">
                             </div>
                             <div class="col-md-6 pt-md-0 pt-3">
-                                <label for="lastname">Last Name</label>
+                                <label for="lastname"><%= __('surname') %></label>
                                 <input type="text" name="soyad" value="<%- user.soyad %>" class="bg-light form-control" placeholder="Smith">
                             </div>
                         </div>
                         <div class="row py-2">
                             <div class="col-md-6">
-                                <label for="mail">Email Address</label>
-                                <input type="text" name="mail" value="<%- user.mail %>"class="bg-light form-control" readonly placeholder="steve_@email.com">
-                            </div>
-                            
-                        </div>
-                        <div class="row py-2">
-                            
-                            <div class="col-md-6 pt-md-0 pt-3" id="lang">
-                                <label for="language">Language</label>
+                                <label for="mail"><%= __('email') %></label>
+                                <input type="text" name="mail" value="<%- user.mail %>"class="bg-light form-control" readonly placeholder="someone@email.com">
+                            </div> 
+                            <div class="col-md-6 pt-md-0 pt-3">
+                                <label for="language"><%= __('language') %></label>
                                 <div class="arrow">
                                     <select name="language" id="language" class="bg-light">
                                         <option value="english" selected>English</option>
                                         <option value="english_us">English (United States)</option>
                                         <option value="enguk">English UK</option>
-                                        <option value="arab">Turkish</option>
+                                        <option value="tr">Turkish</option>
                                     </select>
                                 </div>
+                            </div>                           
+                        </div>                            
+                        <div class="py-2">
+                            <div class="col-md-6 pt-md-0 pt-3" id="role">
+                                    <%= __('aroles') %>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">A First item</li>
+                                        <li class="list-group-item">A second item</li>
+                                        <li class="list-group-item">A third item</li>                                        
+                                    </ul>
                             </div>
                         </div>
                         <div class="py-3 pb-4 border-bottom">
-                            <button type="submit" class="btn btn-primary mr-3">Save Changes</button>
-                            <button class="btn border button">Cancel</button>
+                            <button type="submit" class="btn btn-primary"><%= __('save') %></button>
+                            <a href="\" type="button" class="btn btn-secondary" ><%= __('cancel') %></a>
                         </div>
                 </form>
-                <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                <div class="d-sm-flex align-items-center justify-content-between pt-3" id="deactivate">
                     <div>
-                        <b>Deactivate your account</b>
-                        <p>Details about your company account and password</p>
+                        <b><%= __('dainfo') %></b>
+                        <!--<p>Details about your company account and password</p>-->
                     </div>
-                    <div class="ml-auto">
-                        <button class="btn danger">Deactivate</button>
+                    <div>
+                        <!--<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                            Deactivate
+                        </button>-->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">
+                            <%= __('deactivate') %>
+                        </button>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Deactivate Modal -->
+<div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Deactivation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to deactivate your account?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger">Yes, Deactivate</button>
+      </div>
+    </div>
+  </div>
 </div>
 

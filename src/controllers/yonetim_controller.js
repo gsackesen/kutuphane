@@ -7,7 +7,12 @@ const anaSayfayiGoster = function(req,res,next){
 */
 const profilSayfasiniGoster = function(req,res,next){
 
-    res.render('profil',{user:req.user,layout:'./layout/main_layout.ejs'});
+    res.render('profil',{user:req.user,layout:'./layouts/main_layout.ejs'});
+}
+
+const adminSayfasiniGoster = function(req,res,next){
+
+    res.render('administration',{user:req.user,layout:'./layouts/main_layout.ejs'});
 }
 
 
@@ -28,8 +33,7 @@ const profilGuncelle = async function(req,res,next){
           // console.log('update tamamlandı');
           // res.render('profil',{user:req.user,layout:'./layout/yonetim_layout.ejs'});
           res.redirect("/profil");
-        };
-       
+        };      
         
     }
     catch(err){
@@ -41,5 +45,6 @@ const profilGuncelle = async function(req,res,next){
 module.exports={
   //  anaSayfayiGoster,
     profilSayfasiniGoster,
-    profilGuncelle
+    profilGuncelle,
+    adminSayfasiniGoster
 }

@@ -6,12 +6,17 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 
+
+//template engine ayarları
+
+
+
 const yeniSifreFormuGoster=async(req,res,next) => {
 
     if (res.locals.id.length==1 && res.locals.token.length==1){
-        res.render('new_password',{layout:'./layout/auth_layout.ejs'});
+        res.render('new_password',{layout:'./layouts/main_layout.ejs'});
     }else{
-        req.flash('validation_error', [{msg:'Please, click on the link in the mail. Token is not valid or expired.'}]);          
+        req.flash('validation_error', [{msg:'tokenexpired'}]);          
         res.redirect('/forget-password'); 
     };
         
@@ -29,7 +34,7 @@ const yeniSifreLinki=async(req, res, next) =>{
         try {      
             jwt.verify(linktekiToken,secret,async(e,decoded)=>{
                 if(e){
-                    req.flash('error','Signature dismatch or expired');
+                    req.flash('error','signatureexpired');
                     res.redirect('/forget-password');
                 }else{
                     
@@ -62,13 +67,13 @@ const yeniSifreLinki=async(req, res, next) =>{
             });
 
         }catch (err) {
-                    req.flash('error','Error, please try again');
+                    req.flash('error','tryagain');
                     res.redirect('/login');
         }
 
 
     }else{
-        req.flash('validation_error', [{msg:'Please, click on the link in the mail. Token is not valid or expired.'}]);          
+        req.flash('validation_error', [{msg:'tokenexpired'}]);          
         res.redirect('/forget-password'); 
     };
 
@@ -91,17 +96,17 @@ const yeniSifreyiKaydet = async(req,res,next)=>{
         try {      
             jwt.verify(req.body.token,secret,async(e,decoded)=>{
                 if(e){
-                    req.flash('error','Signature dismatch or expired');
+                    req.flash('error','signatureexpired');
                     res.redirect('/forget-password');
                 }else{
                     const hashedPassword= await bcrypt.hash(req.body.sifre,10);
                     const sonuc= await User.findByIdAndUpdate(req.body.id,{sifre:hashedPassword});
 
                     if (sonuc){
-                        req.flash('success_message',[{msg:'Password has been updated successfully'}]);
+                        req.flash('success_message',[{msg:'pupdatesuccess'}]);
                         res.redirect('/login');
                     }else{
-                        req.flash('error','Password could not be updated. pls retry');
+                        req.flash('error','pupdateerror');
                         res.redirect('/forget-password/');
                     };                    
                 };
@@ -114,10 +119,12 @@ const yeniSifreyiKaydet = async(req,res,next)=>{
     };
 
 };
+
 const loginFormuGoster = (req,res,next)=>{
-    res.render('login',{layout:'./layout/main_layout.ejs'});
+    res.render('login',{layout:'./layouts/main_layout.ejs'});
     
 };
+
 const login= (req,res,next)=>{
     
     const hatalar= validationResult(req);
@@ -140,7 +147,7 @@ const login= (req,res,next)=>{
 };
 
 const forgetPasswordFormuGoster = (req,res,next)=>{
-    res.render('forget_password',{layout:'./layout/main_layout.ejs'});
+    res.render('forget_password',{layout:'./layouts/main_layout.ejs'});
 };
 
 const forgetPassword = async(req,res,next)=>{
@@ -180,8 +187,8 @@ const forgetPassword = async(req,res,next)=>{
                 await transporter.sendMail({
                     from:'NodeJS App',
                     to: _user.mail,
-                    subject:'Password Reset',
-                    text:'Please click link to reset your password '+url
+                    subject:res.__('mailsubject2'),
+                    text:res.__('mailtext2')+' '+url
                 },(error,info)=>{
                     if (error){
                         console.log('Error'+error);
@@ -190,14 +197,14 @@ const forgetPassword = async(req,res,next)=>{
                     //console.log(info);
                     transporter.close();
                 });
-                req.flash('success_message',[{msg: 'Please check your mailbox'}]);
+                req.flash('success_message',[{msg: 'checkmailbox'}]);
                 res.redirect('/forget-password');          
 
 
 
 
             }else {
-                req.flash('validation_error', [{msg:'Email not registered or not activated'}]);
+                req.flash('validation_error', [{msg:'emailnotactive'}]);
                 req.flash('mail',req.body.mail);
                 res.redirect('/forget-password');            
             };
@@ -214,7 +221,7 @@ const forgetPassword = async(req,res,next)=>{
 
 const registerFormuGoster = (req,res,next)=>{
     //console.log(req.flash('validation_error'));
-    res.render('register',{layout:'./layout/main_layout.ejs'});
+    res.render('register',{layout:'./layouts/main_layout.ejs'});
 };
 
 const register = async (req,res,next)=>{
@@ -233,7 +240,7 @@ const register = async (req,res,next)=>{
             const _user = await User.findOne({mail:req.body.mail});
            
             if(_user && _user.emailAktif==true) {
-                req.flash('validation_error', [{msg:'Email already exists'}]);
+                req.flash('validation_error', [{msg:'mailexist'}]);
                 req.flash('mail',req.body.mail);
                 req.flash('ad',req.body.ad);
                 req.flash('soyad',req.body.soyad);
@@ -283,8 +290,8 @@ const register = async (req,res,next)=>{
                 await transporter.sendMail({
                     from:'NodeJS App',
                     to: newUser.mail,
-                    subject:'Please confirm your mail to register your account',
-                    text:'pls click link to confirm your registration '+url
+                    subject:res.__('mailsubject1'),
+                    text:res.__('mailtext1')+' '+url
                 },(error,info)=>{
                     if (error){
                         console.log('Error'+error);
@@ -293,7 +300,7 @@ const register = async (req,res,next)=>{
                     //console.log(info);
                     transporter.close();
                 });
-                req.flash('success_message',[{msg: 'Please check your mailbox'}]);
+                req.flash('success_message',[{msg: 'checkmailbox'}]);
                 res.redirect('/login');                
             }
         }catch(err) {
@@ -302,29 +309,55 @@ const register = async (req,res,next)=>{
     };    
 };
 
-const logout= async (req, res,next)=>{
-    
-   /* req.logout(function(err) {
-        if (err) { return next(err); }        
-      });      
-     
-  //  delete req.session;
-  // res.clearCookie('connect.sid');
-
-    res.render('login',{layout:'./layout/auth_layout.ejs',success_message:[{msg:'Logout Success '}]});*/
-
+/*
+const logout= async (req, res,next)=>{    
     try {
         await req.logout(function(err){});           
         res.clearCookie("connect.sid"); 
-
-        req.flash('success_message',[{msg: 'Logout Success'}]);
-                res.redirect('/login');  
-        
-        //res.render('login',{layout:'./layout/auth_layout.ejs',success_message:[{msg:'Logout Success '}]});           
+        res.render('login',{layout:'layouts/main_layout.ejs',success_message:[{msg:'losuccess'}]});           
       } catch (error) {
         next();
-     };     
+     };
+};
 
+
+
+const logout = async (req, res, next) => {    
+  try {
+    await req.logout(err => {
+      if (err) return next(err);
+      res.clearCookie("connect.sid"); 
+      //req.flash.msg=('losuccess');
+      res.redirect('/login'); // redirect instead of render
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+*/
+const logout = async (req, res, next) => {    
+
+    console.log (req.session);
+   
+    try {
+        if(req.session)
+        {
+           console.log ("logout1") ;
+           await req.session.destroy(function (err) 
+           {
+             console.log ("logout2") ;
+                if (err) 
+                {
+                    return next(err);
+                } else {
+                    return res.redirect('/login');
+                }
+            }); 
+        }
+    }   
+   catch (error) {
+    next(error);
+  }
 };
 
 const verifyMail=async (req, res, next) =>{
@@ -333,16 +366,16 @@ const verifyMail=async (req, res, next) =>{
         try {
             jwt.verify(token,process.env.CONFIRM_MAIL_JWT_SECRET,async(e,decoded)=>{
                 if(e){
-                    req.flash('error','Signature dismatch or expired');
+                    req.flash('error','signatureexpired');
                     res.redirect('/login');
                 }else{
                     const tokenIcindekiID=decoded.id;
                     const sonuc=await User.findByIdAndUpdate(tokenIcindekiID,{emailAktif:true});
                     if(sonuc){
-                        req.flash('success_message',[{msg:'Mail successfully registered'}]);
+                        req.flash('success_message',[{msg:'mailregsuccess'}]);
                         res.redirect('/login');
                     }else{
-                        req.flash('error','Please register the user again');
+                        req.flash('error','mailregerror');
                         res.redirect('/login');
                     }
                 }
@@ -350,11 +383,11 @@ const verifyMail=async (req, res, next) =>{
             });
 
         }catch (err) {
-                    req.flash('error','Error, please try again');
+                    req.flash('error','tryagain');
                     res.redirect('/login');
         }
     }else{
-        req.flash('error','Invalid Signature');
+        req.flash('error','invsignature');
         res.redirect('/login');
     };
     

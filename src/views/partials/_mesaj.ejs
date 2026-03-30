@@ -1,7 +1,9 @@
+
 <% validation_error.forEach(element => { %>
+    <% let eetext = element.msg; %>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong> <%- element.msg %> </strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <strong><%= __(eetext) %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>  
@@ -9,18 +11,20 @@
 
 
 <% success_message.forEach(element => { %>
+     <% let etext = element.msg; %>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong> <%- element.msg %> </strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <strong><%= __(etext) %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>  
 <% }) %> 
 
 <% login_error.forEach(error => { %>
+    <% let eerror = error; %>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong> <%- error %> </strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <strong><%= __(eerror) %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>  

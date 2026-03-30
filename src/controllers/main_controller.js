@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 */
 
 const menuGoster = (req,res,next)=>{
-    res.render('index',{layout:'./layout/main_layout.ejs'});
+    res.render('index',{layout:'./layouts/main_layout.ejs'});
     
 };/*
 const profilSayfasiniGoster = function(req,res,next){

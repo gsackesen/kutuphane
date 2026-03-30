@@ -6,7 +6,8 @@ const authMiddleware = require('../middlewares/auth_middleware');
 
 
 router.get('/login',authMiddleware.oturumAcilmamis, authController.loginFormuGoster);
-router.post('/login',authMiddleware.oturumAcilmamis, validatorMiddleware.validateLogin(),authController.login);  
+router.post('/login',authMiddleware.oturumAcilmamis, validatorMiddleware.validateLogin(),authController.login); 
+
 
 router.get('/forget-password',authMiddleware.oturumAcilmamis, authController.forgetPasswordFormuGoster);
 router.get('/forget-password/',authMiddleware.oturumAcilmamis, authController.forgetPasswordFormuGoster);
@@ -23,6 +24,6 @@ router.get('/reset-password',authController.yeniSifreFormuGoster);
 router.post('/reset-password',validatorMiddleware.validateNewPassword(),authController.yeniSifreyiKaydet);
 
 router.get('/logout',authMiddleware.oturumAcilmis, authController.logout);
-
+//router.get('/logout',authMiddleware.oturumAcilmamis, authController.logoutRedirect);
 
 module.exports = router;
