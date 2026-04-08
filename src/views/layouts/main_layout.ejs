@@ -328,12 +328,20 @@
 
               <ul class="dropdown-menu text-small">
                 <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
-                <li><a class="dropdown-item" href="/login"><%= __('signin') %></a></li>
-                <li><a class="dropdown-item" href="/change-password"><%= __('chpassword') %></a></li>
-                <li><a class="dropdown-item" href="/administration"><%= __('admin') %></a></li>
-                <li><a class="dropdown-item" href="/profil"><%= __('profile') %></a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal" ><%= __('signout') %> </a></li>
+
+              <%
+                let urole='nouser';
+                if (user && user.role && user.role.trim() !== '') {
+                  urole = user.role;
+                } %>
+
+                <% if (urole=='nouser') { %>                                     
+                      <%- include('../partials/_menu_nouser')%>
+                <% } else if (urole=='GG_Admin') {  %> 
+                      <%- include('../partials/_menu_admin')%>
+                <% } else {  %> 
+                      <%- include('../partials/_menu_user')%>
+                <% } ; %>                
               </ul>
             </div>
           </div>

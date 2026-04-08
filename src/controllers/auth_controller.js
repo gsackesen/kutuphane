@@ -207,7 +207,7 @@ const login= (req,res,next)=>{
                 failureFlash: true ,
         })(req,res,next);   
     }  
-    pasaport.authenticate 
+    
    
 };
 
