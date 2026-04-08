@@ -37,7 +37,11 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
             trim: true,
-        }
+        },
+        role: {
+            type: String, 
+            default:'GG_Admin'            
+        },
     },{collection:'kullanicilar',timestamps:true});
 
 const User=mongoose.model('User',UserSchema);

@@ -302,17 +302,34 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
+              <!--
                 <img
-                  src="../../uploads/avatars/Empty_Default.png"
+                  src="../../uploads/avatars/Empty_Default.png"                  
                   alt="mdo"
                   width="32"
                   height="32"
                   class="rounded-circle"
-                />
-              </a>
+                /> -->
+                
+              <% 
+                let avatar = 'Empty_Default.png'; 
+                if (user && user.avatar && user.avatar.trim() !== '') {
+                  avatar = user.avatar;
+                } 
+              %>
+
+              <img src="/uploads/avatars/<%= avatar %>" 
+                  alt="Profile"
+                  width="32"
+                  height="32"
+                  class="rounded-circle" />
+
+                </a>              
+
               <ul class="dropdown-menu text-small">
                 <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
                 <li><a class="dropdown-item" href="/login"><%= __('signin') %></a></li>
+                <li><a class="dropdown-item" href="/change-password"><%= __('chpassword') %></a></li>
                 <li><a class="dropdown-item" href="/administration"><%= __('admin') %></a></li>
                 <li><a class="dropdown-item" href="/profil"><%= __('profile') %></a></li>
                 <li><hr class="dropdown-divider" /></li>

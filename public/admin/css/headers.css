@@ -13,3 +13,8 @@
 .dropdown-toggle:not(:focus) {
   outline: 0;
 }
+
+tbody {
+max-height: 10vh;
+overflow: auto;
+}

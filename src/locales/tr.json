@@ -60,7 +60,13 @@
   "pwerror2":"Şifre en fazla 20 karakter uzunluğunda olmalıdır.",
   "pwerror3":"Şifre eşleşmiyor",
   "pleaselogin":"Lütfen Giriş Yapın",
-  "admini":"Yönetim"
+  "admini":"Yönetim",
+  "cpinfo":"",
+  "chpassword":"Şifre Değiştir",
+  "savepassword":"Şifreyi Kaydet",
+  "oldpassword":"Mevcut Şifre",
+  "cpassworderror":"Mevcut girilen şifre hatalı."
+
   
 
 

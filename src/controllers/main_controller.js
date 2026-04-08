@@ -1,6 +1,6 @@
-
 const passport = require ('passport');
 require ('../config/passport_local')(passport);
+
 /*
 const {validationResult}=require ('express-validator');
 const User = require ('../models/user_model');
@@ -10,8 +10,9 @@ const jwt = require('jsonwebtoken');
 */
 
 const menuGoster = (req,res,next)=>{
-    res.render('index',{layout:'./layouts/main_layout.ejs'});
-    
+
+    res.render('index',{user:req.user,layout:'./layouts/main_layout.ejs'});
+   // console.log(req.user);
 };/*
 const profilSayfasiniGoster = function(req,res,next){
 

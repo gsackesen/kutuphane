@@ -60,7 +60,12 @@
   "pwerror2":"password must be max 20 characters",
   "pwerror3":"Password is not matching",
   "pleaselogin":"Please Login",
-  "admini":"Administration"
+  "admini":"Administration",  
+  "cpinfo":"",
+  "chpassword":"Change Password",
+  "savepassword":"Save Password",
+  "oldpassword":"Current Password",
+  "cpassworderror":"Incorrect current password"
 
 
 

@@ -23,6 +23,9 @@ router.get('/reset-password/:id/:token',authController.yeniSifreLinki);
 router.get('/reset-password',authController.yeniSifreFormuGoster);
 router.post('/reset-password',validatorMiddleware.validateNewPassword(),authController.yeniSifreyiKaydet);
 
+router.get('/change-password',authMiddleware.oturumAcilmis,authController.sifreDegistirmeFormuGoster);
+router.post('/change-password',authMiddleware.oturumAcilmis,validatorMiddleware.validateNewPassword(),authController.sifreyiDegistir);
+
 router.get('/logout',authMiddleware.oturumAcilmis, authController.logout);
 //router.get('/logout',authMiddleware.oturumAcilmamis, authController.logoutRedirect);
 

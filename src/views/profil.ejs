@@ -20,11 +20,11 @@
                         <div class="row py-2">
                             <div class="col-md-6">
                                 <label for="firstname"><%= __('name') %></label>
-                                <input type="text" name="ad" value="<%- user.ad %>" class="bg-light form-control" placeholder="Steve">
+                                <input type="text" name="ad" value="<%- user.ad %>" class="bg-light form-control" placeholder="Guven">
                             </div>
                             <div class="col-md-6 pt-md-0 pt-3">
                                 <label for="lastname"><%= __('surname') %></label>
-                                <input type="text" name="soyad" value="<%- user.soyad %>" class="bg-light form-control" placeholder="Smith">
+                                <input type="text" name="soyad" value="<%- user.soyad %>" class="bg-light form-control" placeholder="Berber">
                             </div>
                         </div>
                         <div class="row py-2">
@@ -33,6 +33,8 @@
                                 <input type="text" name="mail" value="<%- user.mail %>"class="bg-light form-control" readonly placeholder="someone@email.com">
                             </div> 
                             <div class="col-md-6 pt-md-0 pt-3">
+                                <!--
+
                                 <label for="language"><%= __('language') %></label>
                                 <div class="arrow">
                                     <select name="language" id="language" class="bg-light">
@@ -42,15 +44,14 @@
                                         <option value="tr">Turkish</option>
                                     </select>
                                 </div>
+                                -->
                             </div>                           
                         </div>                            
                         <div class="py-2">
                             <div class="col-md-6 pt-md-0 pt-3" id="role">
                                     <%= __('aroles') %>
                                     <ul class="list-group">
-                                        <li class="list-group-item">A First item</li>
-                                        <li class="list-group-item">A second item</li>
-                                        <li class="list-group-item">A third item</li>                                        
+                                        <li class="list-group-item"><%- user.role %> </li>                                                                             
                                     </ul>
                             </div>
                         </div>

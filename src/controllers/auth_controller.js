@@ -14,13 +14,30 @@ const jwt = require('jsonwebtoken');
 const yeniSifreFormuGoster=async(req,res,next) => {
 
     if (res.locals.id.length==1 && res.locals.token.length==1){
-        res.render('new_password',{layout:'./layouts/main_layout.ejs'});
+        res.render('new_password',{user:req.user,layout:'./layouts/main_layout.ejs'});
     }else{
         req.flash('validation_error', [{msg:'tokenexpired'}]);          
         res.redirect('/forget-password'); 
     };
         
 };
+
+const sifreDegistirmeFormuGoster=async(req,res,next) => {
+
+
+    res.render('change_password',{user:req.user,layout:'./layouts/main_layout.ejs'});
+
+    /*
+
+    if (res.locals.id.length==1 && res.locals.token.length==1){
+        res.render('change_password',{layout:'./layouts/main_layout.ejs'});
+    }else{
+        req.flash('validation_error', [{msg:'tokenexpired'}]);          
+        res.redirect('/forget-password'); 
+    };
+      */  
+};
+
 
 const yeniSifreLinki=async(req, res, next) =>{
     const linktekiID = req.params.id;
@@ -113,15 +130,63 @@ const yeniSifreyiKaydet = async(req,res,next)=>{
             });
 
         }catch (err) {
-                    req.flash('error','Error, please try again');
+                    req.flash('error','tryagain');
                     res.redirect('/login');
         }        
     };
 
 };
 
+
+
+async function sifreyiDegistir(req, res) {
+  const { oldSifre, sifre ,resifre} = req.body;
+  const userId = req.user._id; // From your auth middleware
+
+  try {
+    const user = await User.findOne({_id:userId,emailAktif:true});
+   
+    // 1. Verify current password
+    const isMatch = await bcrypt.compare(oldSifre, user.sifre);
+
+    //console.log("Karşılaştır " + isMatch )
+    if (!isMatch) {
+
+        req.flash('error','cpassworderror');
+        res.redirect('/change-password');
+        return res.status(400);
+    }        
+
+    const hatalar= validationResult(req);
+
+    if (!hatalar.isEmpty()){
+        req.flash('validation_error', hatalar.array());      
+        req.flash('sifre',sifre);
+        req.flash('resifre',resifre);
+        res.status(500);
+        res.redirect('/change-password');
+    } else{
+            // 2. Hash new password
+            const hashedPassword= await bcrypt.hash(sifre,10);
+            // 3. Save to database
+            const sonuc= await User.findByIdAndUpdate(user._id ,{sifre:hashedPassword});
+
+            if (sonuc){
+                req.flash('success_message',[{msg:'pupdatesuccess'}]);
+                res.redirect('/change-password');
+            }else{
+                req.flash('error','pupdateerror');
+                res.redirect('/change-password/');
+            };
+        }
+    }catch (err) {
+                    req.flash('error','tryagain');
+                    res.redirect('/change-password');
+    };
+};
+
 const loginFormuGoster = (req,res,next)=>{
-    res.render('login',{layout:'./layouts/main_layout.ejs'});
+    res.render('login',{user:req.user,layout:'./layouts/main_layout.ejs'});
     
 };
 
@@ -142,12 +207,12 @@ const login= (req,res,next)=>{
                 failureFlash: true ,
         })(req,res,next);   
     }  
-    
+    pasaport.authenticate 
    
 };
 
 const forgetPasswordFormuGoster = (req,res,next)=>{
-    res.render('forget_password',{layout:'./layouts/main_layout.ejs'});
+    res.render('forget_password',{user:req.user,layout:'./layouts/main_layout.ejs'});
 };
 
 const forgetPassword = async(req,res,next)=>{
@@ -191,7 +256,7 @@ const forgetPassword = async(req,res,next)=>{
                     text:res.__('mailtext2')+' '+url
                 },(error,info)=>{
                     if (error){
-                        console.log('Error'+error);
+                        //console.log('Error'+error);
                     }
                    // console.log('Mail gönderildi');
                     //console.log(info);
@@ -221,7 +286,7 @@ const forgetPassword = async(req,res,next)=>{
 
 const registerFormuGoster = (req,res,next)=>{
     //console.log(req.flash('validation_error'));
-    res.render('register',{layout:'./layouts/main_layout.ejs'});
+    res.render('register',{user:req.user, layout:'./layouts/main_layout.ejs'});
 };
 
 const register = async (req,res,next)=>{
@@ -294,7 +359,7 @@ const register = async (req,res,next)=>{
                     text:res.__('mailtext1')+' '+url
                 },(error,info)=>{
                     if (error){
-                        console.log('Error'+error);
+                       // console.log('Error'+error);
                     }
                    // console.log('Mail gönderildi');
                     //console.log(info);
@@ -309,43 +374,16 @@ const register = async (req,res,next)=>{
     };    
 };
 
-/*
-const logout= async (req, res,next)=>{    
-    try {
-        await req.logout(function(err){});           
-        res.clearCookie("connect.sid"); 
-        res.render('login',{layout:'layouts/main_layout.ejs',success_message:[{msg:'losuccess'}]});           
-      } catch (error) {
-        next();
-     };
-};
-
-
 
 const logout = async (req, res, next) => {    
-  try {
-    await req.logout(err => {
-      if (err) return next(err);
-      res.clearCookie("connect.sid"); 
-      //req.flash.msg=('losuccess');
-      res.redirect('/login'); // redirect instead of render
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-*/
-const logout = async (req, res, next) => {    
 
-    console.log (req.session);
+    //console.log (req.session);
    
     try {
         if(req.session)
-        {
-           console.log ("logout1") ;
+        {        
            await req.session.destroy(function (err) 
-           {
-             console.log ("logout2") ;
+           {         
                 if (err) 
                 {
                     return next(err);
@@ -407,5 +445,7 @@ module.exports = {
     verifyMail,
     yeniSifreFormuGoster,
     yeniSifreyiKaydet,
-    yeniSifreLinki
+    yeniSifreLinki,
+    sifreDegistirmeFormuGoster,
+    sifreyiDegistir
 };
