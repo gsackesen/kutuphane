@@ -81,7 +81,8 @@
   "userdeleted":"User account successfully deleted.",
   "userdeletefail":"error:User account not deleted.",
   "areyousuredelete":"Are you sure to delete user account?",
-  "confirmdelete":"Confirm Delete"
+  "confirmdelete":"Confirm Delete",
+  "notauthrized":"Opps, User not authrized to access"
 
 
 

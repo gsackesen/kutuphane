@@ -81,7 +81,8 @@
   "userdeleted":"Kullanıcı hesabı başarıyla silindi.",
   "userdeletefail":"Hata: Kullanıcı hesabı silinemedi.",
   "areyousuredelete":"Kullanıcı hesabını silmek istediğinizden emin misiniz? ",
-  "confirmdelete":"Evet,Sil"
+  "confirmdelete":"Evet,Sil",
+  "notauthrized":"Opps, Giriş hakkınız yok"
 
   
 }
