@@ -30,6 +30,27 @@ const validateNewUser = () => {
         ];
 };
 
+const validateEditUser = () => {
+
+
+    
+    return[
+        body('mail')
+            .trim()
+            .isEmail().withMessage('mailnotvalid'),
+        body('ad')
+            .trim()
+            .isLength({min:3}).withMessage('nameerror1')
+            .isLength({max:30}).withMessage('nameerror2'),
+        body('soyad')
+            .trim()
+            .isLength({min:3}).withMessage('surnameerror1')
+            .isLength({max:30}).withMessage('surnameerror2'),        
+        ];
+};
+
+
+
 const validateLogin = () => {
     return[
         body('mail')
@@ -70,5 +91,6 @@ module.exports ={
     validateNewUser,
     validateLogin,
     validateMail,
-    validateNewPassword
+    validateNewPassword,
+    validateEditUser
 };

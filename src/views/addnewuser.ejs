@@ -1,0 +1,103 @@
+
+<div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <!--<div class="col-lg-5 d-none d-lg-block bg-register-image"></div>-->
+            
+
+            
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4"><%= __('adduser') %></h1>
+                                <% if (locals.validation_error!=undefined) { %>
+                                    <%- include('./partials/_mesaj')  %>
+                                <% } %>
+                            </div>
+                            <form class="user" action="\addnewuser" method="post">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" value="<%= typeof ad != 'undefined' ? ad : ''%>" name="ad" class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="<%= __('name') %>">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" value="<%= typeof soyad != 'undefined' ? soyad : ''%>" name="soyad" class="form-control form-control-user" id="exampleLastName"
+                                            placeholder="<%= __('surname') %>">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input type="email" value="<%= typeof mail != 'undefined' ? mail : ''%>" name="mail" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="<%= __('email') %>">
+                                </div>
+                                <br>
+                                <div class="form-group row">   
+                                    <div class="col-md-6">
+                                        <label for="roles"><%= __('aroles') %></label>
+                                        <div class="arrow">
+                                            <select name="role" id="role" class="bg-light">                                        
+                                                <option value="GG_User" selected>User</option>
+                                                <option value="GG_Operator">Operator</option>
+                                                <option value="GG_Admin">Admin</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" id="status">
+                                        <label for="emailAktif"><%= __('status') %></label>
+                                        <div class="arrow">
+                                            <select name="emailAktif" id="eAktif" class="bg-light">
+                                                <option value="true" selected><%= __('true') %></option>
+                                                <option value="false" ><%= __('false') %></option>
+                                            </select>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" value="<%= typeof sifre != 'undefined' ? sifre : ''%>" name="sifre" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="<%= __('password') %>">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" value="<%= typeof resifre != 'undefined' ? resifre : ''%>" name="resifre" class="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="<%= __('repassword') %>">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <!-- Kaydet (POST) -->
+                                        <button type="submit" name="action" value="save" class="btn btn-primary">
+                                            <%= __('save') %>
+                                        </button>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <a href="/administration"  class="btn btn-secondary">
+                                            <%= __('cancel') %>
+                                        </a>
+                                    </div>
+                                </div>                         
+
+                                <!--
+                                <hr>
+                                <a href="index.html" class="btn btn-google btn-user btn-block">
+                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                </a>
+                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                </a>
+                                -->
+                            </form>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

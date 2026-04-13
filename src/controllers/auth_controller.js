@@ -148,10 +148,15 @@ async function sifreyiDegistir(req, res) {
    
     // 1. Verify current password
     const isMatch = await bcrypt.compare(oldSifre, user.sifre);
+    if (sifre!=resifre){
+        req.flash('error','comparepass');
+        res.redirect('/change-password');
+        return res.status(400);
+    }
+    const isRepMatch = await compare(oldSifre, user.sifre);
 
     //console.log("Karşılaştır " + isMatch )
     if (!isMatch) {
-
         req.flash('error','cpassworderror');
         res.redirect('/change-password');
         return res.status(400);

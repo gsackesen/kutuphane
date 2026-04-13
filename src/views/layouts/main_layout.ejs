@@ -302,46 +302,37 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-              <!--
-                <img
-                  src="../../uploads/avatars/Empty_Default.png"                  
-                  alt="mdo"
-                  width="32"
-                  height="32"
-                  class="rounded-circle"
-                /> -->
-                
-              <% 
-                let avatar = 'Empty_Default.png'; 
-                if (user && user.avatar && user.avatar.trim() !== '') {
-                  avatar = user.avatar;
-                } 
-              %>
+                                
+                <% 
+                  let avatar = 'Empty_Default.png'; 
+                  if (user && user.avatar && user.avatar.trim() !== '') {
+                    avatar = user.avatar;
+                  } 
+                %>
 
-              <img src="/uploads/avatars/<%= avatar %>" 
-                  alt="Profile"
-                  width="32"
-                  height="32"
-                  class="rounded-circle" />
-
-                </a>              
-
+                <img src="/uploads/avatars/<%= avatar %>" 
+                    alt="Profile"
+                    width="32"
+                    height="32"
+                    class="rounded-circle" />
+                                
+              </a>
               <ul class="dropdown-menu text-small">
                 <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
 
-              <%
-                let urole='nouser';
-                if (user && user.role && user.role.trim() !== '') {
-                  urole = user.role;
-                } %>
+                <%
+                  let urole='nouser';
+                  if (user && user.role && user.role.trim() !== '') {
+                    urole = user.role;
+                  } %>
 
-                <% if (urole=='nouser') { %>                                     
-                      <%- include('../partials/_menu_nouser')%>
-                <% } else if (urole=='GG_Admin') {  %> 
-                      <%- include('../partials/_menu_admin')%>
-                <% } else {  %> 
-                      <%- include('../partials/_menu_user')%>
-                <% } ; %>                
+                  <% if (urole=='nouser') { %>                                     
+                        <%- include('../partials/_menu_nouser')%>
+                  <% } else if (urole=='GG_Admin') {  %> 
+                        <%- include('../partials/_menu_admin')%>
+                  <% } else {  %> 
+                        <%- include('../partials/_menu_user')%>
+                  <% } ; %>                
               </ul>
             </div>
           </div>
@@ -349,12 +340,13 @@
       </header>
       <div class="b-example-divider"></div>
     </main>
-    </head>
+  </head>
   <body>  
-        <%- body %>
-    <!-- Buraya ana ekran görüntüleri gelecek-->
+    <%- body %>
+ 
 
-    <!-- Logout Modal-->
+
+    <!--loogout modal-->
       <div class="modal" id="logoutModal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -371,17 +363,11 @@
             </div>
           </div>
         </div>
-      </div>
-
-      
-</div>
+      </div>      
+  </div> 
 
 
-
-
-    <script
-      src= "/admin/js/bootstrap.bundle.min.js"
-      class="astro-vvvwv3sm"
-    ></script>
+  
+    <script src= "/admin/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

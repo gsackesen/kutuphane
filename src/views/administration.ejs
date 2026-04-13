@@ -3,206 +3,130 @@
     <div class="col-xl-6 col-lg-12 col-md-9">
         <div class="card o-hidden border-0 shadow-lg my-3">
             <div class="card-body p-6">
-                <form action="/profil-guncelle" method="post" enctype="multipart/form-data">    
-                    <h2 class="border-bottom text-center fw-semibold"> <%= __('admini') %> </h2>
-                    
-                    <h4 class="text-left"> Kullanıcı Yönetimi </h4>
-                    <hr>
+                <form class="user">    
+                    <h2 class="border-bottom text-center fw-semibold"> <%= __('admini') %> </h2>                    
+                    <h4 class="text-left"> <%= __('usermn') %> </h4>
+                    <hr>                
+                    <a href="\addnewuser" class="btn btn-success "> 
+                        <div  style=" font-size:medium" > <%= __('adduser') %></div>                           
+                    </a>
+                    <% if (locals.validation_error!=undefined || locals.success_message!=undefined || locals.login_error!=undefined  ) { %>                                     
+                        <%- include('./partials/_mesaj')%>
+                    <% } %>  
                     <div>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Ad</th>
-                                <th scope="col">Soyad</th>
-                                <th scope="col">e-Posta</th>
-                                <th scope="col">Atanmış Rol</th>
+                                <th scope="col"><%= __('name') %></th>
+                                <th scope="col"><%= __('surname') %></th>
+                                <th scope="col"><%= __('email') %></th>
+                                <th scope="col"><%= __('aroles') %></th>
+                                <th scope="col"><%= __('status') %></th>
+                                <th scope="col">#</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>GG_USER</td>
-                                </tr>
-                                <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>GG_USER</td>
-                                </tr>
-                                <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>GG_USER</td>
-                                </tr>
+                           <tbody>
+                                <% if (Array.isArray(users)) { %>
+                                    <% users.forEach((listedUser, index) => { %>
+                                    <tr data-id="<%= listedUser._id %>">
+                                        <th scope="row"><%= index + 1 %></th>
+                                        <td><%= listedUser.ad %></td>
+                                        <td><%= listedUser.soyad %></td>
+                                        <td><%= listedUser.mail %></td>
+                                        <td><%= listedUser.role %></td>
+                                        <% let st= listedUser.emailAktif; %>
+                                        <% if (st){ %>
+                                            <td><%= __('true') %></td>
+                                        <% } else { %>
+                                            <td><%= __('false') %></td>    
+                                        <% }; %>
+                                        
+                                        <td>                                            
+                                            <div class="dropdown text-end">
+                                                <a href="#" class="fa-solid fa-ellipsis link-body-emphasis text-decoration-none" 
+                                                    data-bs-toggle="dropdown" aria-expanded="false"></a>
+                                                <ul class="dropdown-menu text-small">
+                                                    <li><a class="dropdown-item" href="/edit-user/<%= listedUser._id %>"><%= __('edituser') %></a></li>
+                                                   <li>
+                                                        <a class="dropdown-item" href="#"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#deleteUser"
+                                                                data-userid="<%= listedUser._id %>">
+                                                                <%= __('deleteuser') %>
+                                                        </a>
+                                                    </li>
+
+                                                    <% if (listedUser.emailAktif) {%>
+                                                    <li><a class="dropdown-item" href="/resetpassword/<%= listedUser._id %>"><%= __('resetpassword') %></a></li> 
+                                                    <% } %>                                                   
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                                <% } else { %>
+                                    <tr><td colspan="6">Kullanıcı bulunamadı</td></tr>
+                                <% } %>
                             </tbody>
                         </table>
                     </div>
                     <hr>
-                    <div class="d-sm-flex align-items-center justify-content-between pt-3"></div>
-                    
-                    <h4 class="text-left"> Kullanıcı Detayı </h4>
-
-                    <div class="py-2" style="margin: 5px;margin-left: 10px;">
-                    <div class="row py-2">
-
-                        <div class="col-md-6">
-                                    <label for="firstname"><%= __('name') %></label>
-                                    <input type="text" name="ad" value="<%- user.ad %>" class="bg-light form-control" placeholder="Steve">
-                                </div>
-                                <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="lastname"><%= __('surname') %></label>
-                                    <input type="text" name="soyad" value="<%- user.soyad %>" class="bg-light form-control" placeholder="Smith">
-                                </div>
-                            </div>
-                            <div class="row py-2">
-                                <div class="col-md-6">
-                                    <label for="mail"><%= __('email') %></label>
-                                    <input type="text" name="mail" value="<%- user.mail %>"class="bg-light form-control" readonly placeholder="someone@email.com">
-                                </div> 
-                                <div class="col-md-6 pt-md-0 pt-3">
-                                    <label for="aroles"><%= __('aroles') %></label>
-                                    <div class="arrow">
-                                        <select name="aroles" id="aroles" class="bg-light">
-                                            <option value="english" selected>English</option>
-                                            <option value="english_us">English (United States)</option>
-                                            <option value="enguk">English UK</option>
-                                            <option value="tr">Turkish</option>
-                                        </select>
-                                    </div>
-                                </div>                           
-                            </div>          
-                        </div>   
-                    </div>   
-
-
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-bd-primary " >
-                            Güncelle
-                        </button>
-                    </div>                    
-                    
-                    <hr>
-
-                    <div class="d-sm-flex align-items-center justify-content-between pt-3"></div>
-                    <h4 class="text-left"> Yetki Grupları </h4>
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-bd-primary " >
-                            Güncelle
-                        </button>                        
-                    </div>
-
-                    <hr>
-
-                    <div class="d-sm-flex align-items-center justify-content-between pt-3"></div>
-                    <h4 class="text-left"> Yetki Grupları </h4>
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-bd-primary " >
-                            Güncelle
-                        </button>                        
-                    </div>
-
-                    
-                    <!--
-                    <div class="d-flex align-items-start py-3 border-bottom ">
-                        <img src="/uploads/avatars/<%- user.avatar  %>" class="rounded-circle" alt="" width="150" height="150" style="margin-left: 10px;"> 
-                        <div class="col-md-1"></div>                        
-                         <div class="row">
-                            <h5><%= __('pphoto') %></h5>
-                            <p><%= __('pinfo') %></p> 
-                            <div class="input-group input-group-sm mb-3" id="img-section">
-                                <input type="file" name="avatar" class="btn button border"><b></b></input>                                        
-                            </div>
-                        </div>                        
-                    </div>
-                    
-                    <div class="py-2" style="margin: 5px;margin-left: 10px;">
-                        <div class="row py-2">
-                            <div class="col-md-6">
-                                <label for="firstname"><%= __('name') %></label>
-                                <input type="text" name="ad" value="<%- user.ad %>" class="bg-light form-control" placeholder="Steve">
-                            </div>
-                            <div class="col-md-6 pt-md-0 pt-3">
-                                <label for="lastname"><%= __('surname') %></label>
-                                <input type="text" name="soyad" value="<%- user.soyad %>" class="bg-light form-control" placeholder="Smith">
-                            </div>
-                        </div>
-                        <div class="row py-2">
-                            <div class="col-md-6">
-                                <label for="mail"><%= __('email') %></label>
-                                <input type="text" name="mail" value="<%- user.mail %>"class="bg-light form-control" readonly placeholder="someone@email.com">
-                            </div> 
-                            <div class="col-md-6 pt-md-0 pt-3">
-                                <label for="language"><%= __('language') %></label>
-                                <div class="arrow">
-                                    <select name="language" id="language" class="bg-light">
-                                        <option value="english" selected>English</option>
-                                        <option value="english_us">English (United States)</option>
-                                        <option value="enguk">English UK</option>
-                                        <option value="tr">Turkish</option>
-                                    </select>
-                                </div>
-                            </div>                           
-                        </div>                            
-                        <div class="py-2">
-                            <div class="col-md-6 pt-md-0 pt-3" id="role">
-                                    <%= __('aroles') %>
-                                    <ul class="list-group">
-                                        <li class="list-group-item">A First item</li>
-                                        <li class="list-group-item">A second item</li>
-                                        <li class="list-group-item">A third item</li>                                        
-                                    </ul>
-                            </div>
-                        </div>
-                        <div class="py-3 pb-4 border-bottom">
-                            <button type="submit" class="btn btn-primary"><%= __('save') %></button>
-                            <a href="\" type="button" class="btn btn-secondary" ><%= __('cancel') %></a>
-                        </div>
-
-                    -->
-                </form>
-                <!--
-                <div class="d-sm-flex align-items-center justify-content-between pt-3" id="deactivate">
-                    <div>
-                        <b><%= __('dainfo') %></b>
-                        !--<p>Details about your company account and password</p>--
-                    </div>
-                    <div>
-                        !--<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#logoutModal"
-                            Deactivate
-                        </button>--
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">
-                            <%= __('deactivate') %>
-                        </button>
-                    </div>
                 </div>
-                -->
+              </form>
             </div>
-        </div>
+         </div>
     </div>
-</div>
 
-<!-- Deactivate Modal -->
-<div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+<!-- Delete User Modal -->
+<div class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Deactivation</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="deleteUserLabel"><%= __('deleteuser') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= __('close') %>"></button>
       </div>
       <div class="modal-body">
-        Are you sure you want to deactivate your account?
+        <p><%= __('areyousuredelete') %></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger">Yes, Deactivate</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= __('cancel') %></button>
+        <form id="deleteForm" method="POST">
+          <button type="submit" class="btn btn-danger"><%= __('confirmdelete') %></button>
+        </form>
       </div>
     </div>
   </div>
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var deleteModal = document.getElementById('deleteUser');
+  console.log(deleteModal);
+
+  deleteModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    if (!button) return;
+
+    var userId = button.dataset.userid; // modern kullanım
+
+    if (!userId) {
+      console.warn("userId bulunamadı!");
+      return;
+    }
+
+    document.getElementById('deleteForm').action = '/delete-user/' + userId;
+  });
+});
+</script>
+
+
+
+
+
 </div>
 

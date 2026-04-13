@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema(
         },
         role: {
             type: String, 
-            default:'GG_Admin'            
+            default:'GG_User'            
         },
     },{collection:'kullanicilar',timestamps:true});
 

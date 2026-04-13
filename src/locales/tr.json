@@ -65,11 +65,23 @@
   "chpassword":"Şifre Değiştir",
   "savepassword":"Şifreyi Kaydet",
   "oldpassword":"Mevcut Şifre",
-  "cpassworderror":"Mevcut girilen şifre hatalı."
-
-  
-
-
+  "cpassworderror":"Mevcut girilen şifre hatalı.",
+  "comparepass":"Şifreler Eşleşmiyor.",
+  "dataerror":"Veri çekme hatası:",
+  "edituser":"Kullanıcıyı Düzenle",
+  "resetpassword":"Şifreyi Sıfırla",
+  "usermn":"Kullanıcı Yönetimi",
+  "status":"Durum",
+  "true":"Aktif",
+  "false":"Pasif",
+  "userupdated":"Kullanıcı bilgileri güncellendi.",
+  "adduser":"Yeni Kullanıcı Ekle",
+  "usercreated":"Kullanıcı heabı başarıyla oluşturuldu.",
+  "deleteuser":"Kullanıcı hesabını sil",
+  "userdeleted":"Kullanıcı hesabı başarıyla silindi.",
+  "userdeletefail":"Hata: Kullanıcı hesabı silinemedi.",
+  "areyousuredelete":"Kullanıcı hesabını silmek istediğinizden emin misiniz? ",
+  "confirmdelete":"Evet,Sil"
 
   
 }

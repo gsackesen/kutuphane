@@ -1,0 +1,64 @@
+ 
+<div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                 <% if (locals.validation_error!=undefined || locals.success_message!=undefined || locals.login_error!=undefined  ) { %>
+                                <%- include('./partials/_mesaj')  %>
+                            <% } %> 
+                <form action="/edit-user/<%- userId%>" method="post" >    
+                    <h2 class="border-bottom text-center fw-semibold"><%= __('usermn') %></h2>
+                    <div class="d-flex align-items-start py-3 border-bottom ">
+                                            
+                    </div>
+                    <div class="py-2" style="margin: 5px;margin-left: 10px;">
+                        <div class="row py-2">
+                            <div class="col-md-6">
+                                <label for="firstname"><%= __('name') %></label>
+                                <input type="text" name="ad" value="<%- selectedUser.ad %>" class="bg-light form-control" placeholder="">
+                            </div>
+                            <div class="col-md-6 pt-md-0 pt-3">
+                                <label for="lastname"><%= __('surname') %></label>
+                                <input type="text" name="soyad" value="<%- selectedUser.soyad %>" class="bg-light form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-6">
+                                <label for="mail"><%= __('email') %></label>
+                                <input type="text" name="mail" value="<%- selectedUser.mail %>"class="bg-light form-control" readonly placeholder="">
+                            </div> 
+                            <div class="col-md-6 pt-md-0 pt-3">
+                                <label for="roles"><%= __('aroles') %></label>
+                                <div class="arrow">
+                                    <select name="role" id="role" class="bg-light">
+                                        <option value="na" <%= selectedUser.role === 'na' ? 'selected' : '' %>></option>
+                                        <option value="GG_User" <%= selectedUser.role === 'GG_User' ? 'selected' : '' %>>User</option>
+                                        <option value="GG_Operator" <%= selectedUser.role === 'GG_Operator' ? 'selected' : '' %>>Operator</option>
+                                        <option value="GG_Admin" <%= selectedUser.role === 'GG_Admin' ? 'selected' : '' %>>Admin</option>
+                                    </select>
+                                </div>                                
+                            </div>                           
+                        </div>                            
+                        <div class="py-2">
+                            <div class="col-md-6 pt-md-0 pt-3" id="status">
+                                <label for="emailAktif"><%= __('status') %></label>
+                                <div class="arrow">
+                                   <select name="emailAktif" id="eAktif" class="bg-light">
+                                        <option value='true' <%= selectedUser.emailAktif === true ? 'selected' : '' %>><%= __('true') %></option>
+                                        <option value='false' <%= selectedUser.emailAktif === false ? 'selected' : '' %>><%= __('false') %></option>
+                                    </select>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="py-3 pb-4 border-bottom">
+                            <button type="submit" class="btn btn-primary"><%= __('save') %></button>
+                            <a href="/administration" type="button" class="btn btn-secondary" ><%= __('cancel') %></a>
+                        </div>
+                </form>                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
