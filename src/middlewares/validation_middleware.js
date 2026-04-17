@@ -87,10 +87,39 @@ const validateNewPassword = () => {
             })
         ];
 };
+
+
+
+
+const validateBook = () => {
+    {
+         return[
+        body('yazaradi')
+            .trim()
+            .isLength({min:3}).withMessage('nameerror1')
+            .isLength({max:30}).withMessage('nameerror2'),
+        body('kitapadi')
+            .trim()
+            .isLength({min:3}).withMessage('nameerror1')
+            .isLength({max:30}).withMessage('nameerror2'),
+        body('dil')
+            .trim()
+            .isLength({min:3}).withMessage('nameerror1')
+            .isLength({max:30}).withMessage('nameerror2'),
+        body('notlar')
+            .trim()            
+            .isLength({max:200}).withMessage('nameerror2'),
+        ];
+    };
+};       
+       
+       
+
 module.exports ={
     validateNewUser,
     validateLogin,
     validateMail,
     validateNewPassword,
-    validateEditUser
+    validateEditUser,
+    validateBook
 };

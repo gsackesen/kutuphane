@@ -1,0 +1,113 @@
+ 
+<div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <form action="/kitapekle" method="post" enctype="multipart/form-data">    
+                    <h2 class="border-bottom text-center fw-semibold"><%= __('kitapekle') %></h2>
+
+                    <% if (locals.validation_error!=undefined || locals.success_message!=undefined || locals.login_error!=undefined  ) { %>
+                                <%- include('./partials/_mesaj')  %>
+                    <% } %>
+                    
+                    <div class="d-flex align-items-start py-3 border-bottom ">
+                        <img src="/uploads/covers/Empty_Default.png" class="rounded" alt="" width="150" height="150" style="margin-left: 10px;"> 
+                        <div class="col-md-1"></div>                        
+                         <div class="row">
+                            <h5><%= __('coverpic') %></h5>
+                            <p><%= __('pinfo') %></p> 
+                            <div class="input-group input-group-sm mb-3" id="img-section">
+                                <input type="file" name="cover" class="btn button border"><b></b></input>                                        
+                            </div>
+                        </div>                        
+                    </div> 
+                    
+                    <div class="py-2" style="margin: 5px;margin-left: 10px;">
+                        <div class="row py-2">
+                            <div class="col-md-6">
+                                <label for="kitapadi"><%= __('kitapadi') %></label>
+                                <input type="text" name="kitapadi"  class="bg-light form-control" placeholder="">
+                            </div>
+                            <div class="col-md-6 pt-md-0 pt-3">
+                                <label for="yazaradi"><%= __('yazaradi') %></label>
+                                <input type="text" name="yazaradi"  class="bg-light form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="py-2" style="margin: 5px;margin-left: 10px;">
+                            <div class="row py-2">
+                                <div class="col-md-6">
+                                    <label for="ISBN"><%= __('ISBN') %></label>
+                                    <input type="text" name="ISBN" class="bg-light form-control"  placeholder="">
+                                </div>                 
+                            
+                                <div class="col-md-6 pt-md-0 pt-3">
+                                    <label for="yayinevi"><%= __('yayinevi') %></label>
+                                    <div class="arrow">
+                                        <select name="yayinevi" id="yayinevi" class="bg-light">
+                                            <option value="Bilinmeyen"selected >Bilinmeyen</option>
+                                            <option value="Agora Kitaplığı" >Agora Kitaplığı</option>
+                                            <option value="Alfa Yayınları">Alfa Yayınları</option>
+                                            <option value="Can Yayınları">Can Yauınları</option>                                        
+                                            <option value="Destek Yayınları">Destek Yayınları</option>
+                                            <option value="Doğan Kitap">Doğan Kitap</option>
+                                            <option value="Everest Yayınları">Everest Yayınları</option>
+                                            <option value="İletişim Yayınları">İletişim Yayınları</option>
+                                            <option value="Kırmızı Kedi Yayınları">Kırmızı Kedi Yayınları</option>
+                                            <option value="Literatür Yayıncılık">Literatür Yayıncılık</option>
+                                            <option value="Metis Yayınları">Metis Yayınları</option>
+                                            <option value="Pegasus Yayınları">Pegasus Yayınları</option>
+                                            <option value="Profil Kitap">Profil Kitap</option>
+                                            <option value="Remzi Kitabevi">Remzi Kitabevi</option>
+                                            <option value="Sel Yayıncılık">Sel Yayıncılık</option>
+                                            <option value="Türkiye İş Bankası Kültür Yayınları">Türkiye İş Bankası Kültür Yayınları</option>
+                                            <option value="Yapı Kredi Yayınları (YKY)">Yapı Kredi Yayınları (YKY)</option>                                                                                    
+                                        </select>
+                                    </div>                              
+                                </div>
+                            </div>
+                        </div>   
+                        <div class="py-2" style="margin: 5px;margin-left: 10px;">
+                            <div class="row py-2">
+                                <div class="col-md-6">
+                                    <label for="katagori"><%= __('kategori') %></label>
+                                    <div class="arrow">
+                                        <select name="kategori" id="kategori" class="bg-light">
+                                            <option value="Bilinmeyen"selected >Bilinmeyen</option>
+                                            <option value="Klasik" >Klasik</option>
+                                            <option value="Polisiye">Polisiye</option>
+                                            <option value="Roman">Roman</option>                                        
+                                        </select>
+                                    </div>
+                                </div>  
+                                <div class="col-md-6 pt-md-0 pt-3">
+                                    <label for="dil"><%= __('dil') %></label>
+                                    <div class="arrow">
+                                        <select name="dil" id="dil" class="bg-light">
+                                            <option value="Türkçe"selected >Türkçe</option>
+                                            <option value="İngilizce" >İngilizce</option>
+                                            <option value="Almanca">Almanca</option>
+                                            <option value="Arapça">Arapça</option>                                        
+                                        </select>
+                                </div>                                 
+                            </div>                          
+                        <div class="py-2">
+                            <div class="row py-2">
+                            <div class="col-md-12">
+                                <label for="notlar"><%= __('notes') %></label>
+                                <input type="text" name="notlar" class="bg-light form-control"  placeholder="">
+                            </div> 
+                        </div>
+                        </div>
+                        <div class="py-3 pb-4 border-bottom">
+                            <button type="submit" class="btn btn-primary"><%= __('save') %></button>
+                            <a href="\" type="button" class="btn btn-secondary" ><%= __('cancel') %></a>
+                        </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

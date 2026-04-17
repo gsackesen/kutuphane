@@ -264,37 +264,42 @@
               <image x="0" y="0" width="40px" height="32px" xlink:href="/admin/img/libimage.png"/>                
               </svg>
             </a>
-            <ul
-              class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-            >
-              <li>
-                <a href="#" class="nav-link px-2 link-secondary"
-                  ><%= __('menu1') %></a>
-              </li>
-              <li>
-                <a href="#" class="nav-link px-2 link-body-emphasis"
-                  ><%= __('menu2') %></a
-                >
-              </li>
-              <li>
-                <a href="#" class="nav-link px-2 link-body-emphasis"
-                  ><%= __('menu3') %></a
-                >
-              </li>
-              <li>
-                <a href="#" class="nav-link px-2 link-body-emphasis"
-                  ><%= __('menu4') %></a
-                >
-              </li>
-            </ul>
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-              <input
-                type="search"
-                class="form-control"
-                placeholder=<%= __('search') %>
-                aria-label="Search"
-              />
-            </form>
+            
+             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <% let urole = 'nouser';
+                  if (user && user.role && user.role.trim() !== '') {
+                    urole = user.role;
+                  } %>
+
+                <% if (urole === "GG_Admin" || urole === "GG_Operator") { %>
+                  <li>
+                    <div class="dropdown text-end">
+                      <a href="#"
+                        class="d-block nav-link px-2 link-body-emphasis text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <%= __('menu3') %>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/kitapekle">Kitap Ekle</a>
+                      </div>
+                    </div>
+                  </li>
+                <% } %>
+              </ul>
+
+              <% if (urole === "GG_Admin" || urole === "GG_Operator") { %>
+                <!-- Admin/Operator için form ortada -->
+                <form class="col-12 col-lg-auto mb-2 mb-lg-0" role="search">
+                  <input type="search" class="form-control" id="searchInput"
+                        placeholder="<%= __('search') %>" aria-label="Search" />
+                </form>
+              <% } else { %>
+                <!-- Normal kullanıcı için form sağda -->
+                <form class="d-flex ms-auto col-12 col-lg-auto mb-2 mb-lg-0" role="search">
+                 
+                </form>
+              <% } %>
             <div class="dropdown text-end">
               <a
                 href="#"
@@ -321,7 +326,7 @@
                 <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
 
                 <%
-                  let urole='nouser';
+                  //let urole='nouser';
                   if (user && user.role && user.role.trim() !== '') {
                     urole = user.role;
                   } %>

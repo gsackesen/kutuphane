@@ -7,9 +7,9 @@ const validatorMiddleware = require('../middlewares/validation_middleware');
 const roleMiddleware = require('../middlewares/role_middleware');
 
 
-router.get('/',authMiddleware.oturumAcilmis, mainController.menuGoster );
+
 router.get('/profil',authMiddleware.oturumAcilmis, yonetimController.profilSayfasiniGoster);
-router.post('/profil-guncelle',authMiddleware.oturumAcilmis,multerConfig.single('avatar'),yonetimController.profilGuncelle);
+router.post('/profil-guncelle',authMiddleware.oturumAcilmis,multerConfig.upload.single('avatar'),yonetimController.profilGuncelle);
 router.get('/administration',authMiddleware.oturumAcilmis,roleMiddleware.authorizeRoles('GG_Admin'), yonetimController.adminSayfasiniGoster);
 router.post('/userguncelle',authMiddleware.oturumAcilmis,roleMiddleware.authorizeRoles('GG_Admin'), yonetimController.adminUserFill);
 router.get('/resetpassword/:id',authMiddleware.oturumAcilmis, roleMiddleware.authorizeRoles('GG_Admin'),yonetimController.resetPasswordFormuGoster);

@@ -82,7 +82,20 @@
   "userdeletefail":"Hata: Kullanıcı hesabı silinemedi.",
   "areyousuredelete":"Kullanıcı hesabını silmek istediğinizden emin misiniz? ",
   "confirmdelete":"Evet,Sil",
-  "notauthrized":"Opps, Giriş hakkınız yok"
+  "notauthrized":"Opps, Giriş hakkınız yok",
+  "kitapekle":"Kitap Ekle",
+  "kitapadi": "Kitap Adı",
+  "yazaradi":"Yazar",
+  "yayinevi":"Kitapevi",
+  "kategori":"Kategori",
+  "dil":"Dil",
+  "notes":"Notlar",
+  "coverpic":"Kapak Resmi",
+  "kitapduzenle":"Kitap Düzenle",
+  "deletebook":"Kitabı Sil",
+  "areyousuredeletebook":"Kitap kaydını silmek istediğinizden emin misiniz?",
+  "details":"Detaylar"
+
 
   
 }

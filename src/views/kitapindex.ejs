@@ -1,0 +1,145 @@
+
+<main>
+  <div class="container" >
+     <% if (locals.validation_error!=undefined || locals.success_message!=undefined || locals.login_error!=undefined  ) { %>
+                                <%- include('./partials/_mesaj')  %>
+      <% } %>
+    <% if (Array.isArray(books) && books.length > 0) { %>
+      <div class="row" id="cardContainer">
+        <% books.forEach((listedBook) => { %>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card h-100">
+              <img 
+                src="/uploads/covers/<%= listedBook.cover ? listedBook.cover : 'Empty_Default.png' %>" 
+                class="card-img-top cover-img" 
+                alt="Kapak resmi">
+              <div class="card-body">
+                <h4 class="card-title"><%= listedBook.kitapadi %></h4>
+                <h5 class="card-subtitle mb-2 text-muted"><%= listedBook.yazaradi %></h5>
+                <p class="card-text"><%= listedBook.dil %></p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><%= listedBook.kategori %></li>
+                <li class="list-group-item"><%= listedBook.yayinevi %></li>
+                <li class="list-group-item"><%= listedBook.ISBN %></li>
+              </ul>
+              <div class="card-body d-flex justify-content-end gap-2">
+                <%if (user.role === "GG_Admin" ) { %>
+                  <button class="btn btn--view"  data-bs-toggle="offcanvas" data-id="<%= listedBook._id %>" data-bs-target="#detayPanel"><i class="fas fa-eye"></i></button>
+                  <a class="btn btn--edit" href="/kitapduzenle/<%= listedBook._id %>"><i class="fas fa-edit"></i></a>
+                  <button class="btn btn--delete" data-bs-toggle="modal" data-bookid="<%= listedBook._id %>" data-bs-target="#deleteBook" > <i class="fa-regular fa-trash-can"></i></button>
+                <%} else if (user.role === "GG_Operator") { %>
+                  <button class="btn btn--view"  data-bs-toggle="offcanvas" data-id="<%= listedBook._id %>" data-bs-target="#detayPanel"><i class="fas fa-eye"></i></button>
+                  <a class="btn btn--edit" href="/kitapduzenle/<%= listedBook._id %>"><i class="fas fa-edit"></i></a>
+                <%} else  { %>
+                  <button class="btn btn--view"  data-bs-toggle="offcanvas" data-id="<%= listedBook._id %>" data-bs-target="#detayPanel"><i class="fas fa-eye"></i></button>
+                <%}; %>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <h1>Kitap bulunamadı</h1>
+    <% } %>
+  </div>
+
+
+<!-- Offcanvas Panel -->
+<<div class="offcanvas offcanvas-end" tabindex="-1" id="detayPanel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><%= __('details') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body" id="detayIcerik">
+    <!-- Dinamik içerik buraya gelecek -->
+  </div>
+</div>
+
+<script>
+detayPanel.addEventListener('show.bs.offcanvas', function (event) {
+  var button = event.relatedTarget;
+  var bookId = button.getAttribute('data-id');
+  document.getElementById('detayIcerik').innerHTML = "Yükleniyor...";
+
+ fetch('/kitapdetay/' + bookId)
+  .then(res => res.json()) // JSON parse
+  .then(bookDetails => {
+    console.log(bookDetails); // Burada kontrol et
+    document.getElementById('detayIcerik').innerHTML = `
+      <p><strong><%= __('kitapadi') %></strong> ${bookDetails.kitapadi}</p>
+      <p><strong><%= __('yazaradi') %></strong> ${bookDetails.yazaradi}</p>
+      <p><strong><%= __('yayinevi') %></strong> ${bookDetails.kitapevi=== null || bookDetails.kitapevi === undefined ? '' : bookDetails.kitapevi}</p>
+      <p><strong><%= __('dil') %></strong> ${bookDetails.dil=== null || bookDetails.dil === undefined ? '' : bookDetails.dil}</p>
+      <p><strong><%= __('kategori') %></strong> ${bookDetails.kategori=== null || bookDetails.kategori === undefined ? '' : bookDetails.kategori}}</p>
+      <p><strong><%= __('ISBN') %></strong> ${bookDetails.ISBN=== null || bookDetails.ISBN === undefined ? '' : bookDetails.ISBN}</p>
+      <p><strong><%= __('notes') %></strong> ${bookDetails.not === null || bookDetails.not === undefined ? '' : bookDetails.not}</p>
+    `;
+  })
+  .catch(err => console.error(err));
+});
+</script>
+
+   
+<!-- Delete Book Modal -->
+<div class="modal fade" id="deleteBook" tabindex="-1" aria-labelledby="deleteBookLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteUserLabel"><%= __('deletebook') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= __('close') %>"></button>
+      </div>
+      <div class="modal-body">
+        <p><%= __('areyousuredeletebook') %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= __('cancel') %></button>
+        <form id="deleteForm" method="POST">
+          <button type="submit" class="btn btn-danger"><%= __('confirmdelete') %></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var deleteModal = document.getElementById('deleteBook');
+  
+
+  deleteModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+    if (!button) return;
+
+    var bookId = button.dataset.bookid; // modern kullanım
+
+    if (!bookId) {
+      console.warn("bookId bulunamadı!");
+      return;
+    }
+    console.log(bookId);
+    document.getElementById('deleteForm').action = '/delete-book/' + bookId;
+  });
+});
+</script>
+
+<script>
+  document.getElementById('searchInput').addEventListener('keyup', function() {
+    const query = this.value.toLowerCase();
+    const cards = document.querySelectorAll('#cardContainer .card');
+
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      if (text.includes(query)) {
+        card.parentElement.style.display = ''; // göster
+      } else {
+        card.parentElement.style.display = 'none'; // gizle
+      }
+    });
+  });
+</script>
+
+</main>
+

@@ -393,7 +393,7 @@ const logout = async (req, res, next) => {
                 {
                     return next(err);
                 } else {
-                    return res.redirect('/login');
+                    return res.redirect('/');
                 }
             }); 
         }

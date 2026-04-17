@@ -1,0 +1,116 @@
+ 
+<div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+
+                
+                <form action="/kitapduzenle/<%- selectedBook._id  %>" method="post" enctype="multipart/form-data">    
+                    <h2 class="border-bottom text-center fw-semibold"><%= __('kitapduzenle') %></h2>
+                    <% if (locals.validation_error!=undefined || locals.success_message!=undefined || locals.login_error!=undefined  ) { %>
+                                <%- include('./partials/_mesaj')  %>
+                    <% } %>
+                    
+                    <div class="d-flex align-items-start py-3 border-bottom ">
+                        <% let myCover;
+                          selectedBook.cover === null ? myCover='Empty_Default.png' : myCover=selectedBook.cover %>
+                        <img src="/uploads/covers/<%= myCover %>" class="rounded" alt="" width="150" height="150" style="margin-left: 10px;"> 
+                        <div class="col-md-1"></div>                        
+                         <div class="row">
+                            <h5><%= __('coverpic') %></h5>
+                            <p><%= __('pinfo') %></p> 
+                            <div class="input-group input-group-sm mb-3" id="img-section">
+                                <input type="file" name="cover" class="btn button border"><b></b></input>                                        
+                            </div>
+                        </div>                        
+                    </div> 
+                    
+                    <div class="py-2" style="margin: 5px;margin-left: 10px;">
+                        <div class="row py-2">
+                            <div class="col-md-6">
+                                <label for="kitapadi"><%= __('kitapadi') %></label>
+                                <input type="text" name="kitapadi" value="<%- selectedBook.kitapadi %>" class="bg-light form-control" placeholder="">
+                            </div>
+                            <div class="col-md-6 pt-md-0 pt-3">
+                                <label for="yazaradi"><%= __('yazaradi') %></label>
+                                <input type="text" name="yazaradi" value="<%- selectedBook.yazaradi %>"  class="bg-light form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="py-2" style="margin: 5px;margin-left: 10px;">
+                            <div class="row py-2">
+                                <div class="col-md-6">
+                                    <label for="ISBN"><%= __('ISBN') %></label>
+                                    <input type="text" name="ISBN" value="<%- selectedBook.ISBN %>" class="bg-light form-control"  placeholder="">
+                                </div>                 
+                            
+                                <div class="col-md-6 pt-md-0 pt-3">
+                                    <label for="yayinevi"><%= __('yayinevi') %></label>
+                                    <div class="arrow">
+                                        <select name="yayinevi" id="yayinevi"   class="bg-light">
+                                            <option value="Bilinmeyen" <%= selectedBook.yayinevi === 'Bilinmeyen' ? 'selected' : '' %>>Bilinmeyen</option>
+                                            <option value="Agora Kitaplığı" <%= selectedBook.yayinevi === 'Agora Kitaplığı' ? 'selected' : '' %> >Agora Kitaplığı</option>
+                                            <option value="Alfa Yayınları" <%= selectedBook.yayinevi === 'Alfa Yayınları' ? 'selected' : '' %>>Alfa Yayınları</option>
+                                            <option value="Can Yayınları" <%= selectedBook.yayinevi === 'Can Yauınları' ? 'selected' : '' %>>Can Yauınları</option>                                        
+                                            <option value="Destek Yayınları" <%= selectedBook.yayinevi === 'Destek Yayınları' ? 'selected' : '' %>>Destek Yayınları</option>
+                                            <option value="Doğan Kitap" <%= selectedBook.yayinevi === 'Doğan Kitap' ? 'selected' : '' %>>Doğan Kitap</option>
+                                            <option value="Everest Yayınları" <%= selectedBook.yayinevi === 'Everest Yayınları' ? 'selected' : '' %>>Everest Yayınları</option>
+                                            <option value="İletişim Yayınları" <%= selectedBook.yayinevi === 'İletişim Yayınları' ? 'selected' : '' %>>İletişim Yayınları</option>
+                                            <option value="Kırmızı Kedi Yayınları" <%= selectedBook.yayinevi === 'Kırmızı Kedi Yayınları' ? 'selected' : '' %>>Kırmızı Kedi Yayınları</option>
+                                            <option value="Literatür Yayıncılık" <%= selectedBook.yayinevi === 'Literatür Yayıncılık' ? 'selected' : '' %>>Literatür Yayıncılık</option>
+                                            <option value="Metis Yayınları" <%= selectedBook.yayinevi === 'Metis Yayınları' ? 'selected' : '' %>>Metis Yayınları</option>
+                                            <option value="Pegasus Yayınları" <%= selectedBook.yayinevi === 'Pegasus Yayınları' ? 'selected' : '' %>>Pegasus Yayınları</option>
+                                            <option value="Profil Kitap" <%= selectedBook.yayinevi === 'Profil Kitap' ? 'selected' : '' %>>Profil Kitap</option>
+                                            <option value="Remzi Kitabevi"<%= selectedBook.yayinevi === 'Remzi Kitabevi' ? 'selected' : '' %>>Remzi Kitabevi</option>
+                                            <option value="Sel Yayıncılık"<%= selectedBook.yayinevi === 'Sel Yayıncılık' ? 'selected' : '' %>>Sel Yayıncılık</option>
+                                            <option value="Türkiye İş Bankası Kültür Yayınları" <%= selectedBook.yayinevi === 'ürkiye İş Bankası Kültür Yayınları' ? 'selected' : '' %>>Türkiye İş Bankası Kültür Yayınları</option>
+                                            <option value="Yapı Kredi Yayınları (YKY)"<%= selectedBook.yayinevi === 'Yapı Kredi Yayınları (YKY)' ? 'selected' : '' %>>Yapı Kredi Yayınları (YKY)</option>        
+                                        </select>
+                                    </div>                              
+                                </div>
+                            </div>
+                        </div>   
+                        <div class="py-2" style="margin: 5px;margin-left: 10px;">
+                            <div class="row py-2">
+                                <div class="col-md-6">
+                                    <label for="katagori"><%= __('kategori') %></label>
+                                    <div class="arrow">
+                                        <select name="kategori"  id="kategori" class="bg-light">
+                                            <option value="Bilinmeyen"<%= selectedBook.kategori === 'Bilinmeyen' ? 'selected' : '' %> >Bilinmeyen</option>
+                                            <option value="Klasik" <%= selectedBook.kategori === 'Klasik' ? 'selected' : '' %> >Klasik</option>
+                                            <option value="Polisiye" <%= selectedBook.kategori === 'Polisiye' ? 'selected' : '' %>>Polisiye</option>
+                                            <option value="Roman" <%= selectedBook.kategori === 'Roman' ? 'selected' : '' %>>Roman</option>                                        
+                                        </select>
+                                    </div>
+                                </div>  
+                                <div class="col-md-6 pt-md-0 pt-3">
+                                    <label for="dil"><%= __('dil') %></label>
+                                    <div class="arrow">
+                                        <select name="dil" id="dil"  class="bg-light">
+                                            <option value="Türkçe"<%= selectedBook.dil === 'Türkçe' ? 'selected' : '' %>  >Türkçe</option>
+                                            <option value="İngilizce" <%= selectedBook.dil === 'İngilizce' ? 'selected' : '' %> >İngilizce</option>
+                                            <option value="Almanca" <%= selectedBook.dil === 'Almanca' ? 'selected' : '' %> >Almanca</option>
+                                            <option value="Arapça" <%= selectedBook.dil === 'Arapça' ? 'selected' : '' %> >Arapça</option>                                        
+                                        </select>
+                                </div>                                 
+                            </div>                          
+                        <div class="py-2">
+                            <div class="row py-2">
+                            <div class="col-md-12">
+                                <label for="notlar"><%= __('notes') %></label>
+                                <input type="text" name="notlar" value="<%- selectedBook.notlar %>"  class="bg-light form-control"  placeholder="">
+                            </div> 
+                        </div>
+                        </div>
+                        <div class="py-3 pb-4 border-bottom">
+                            <button type="submit" class="btn btn-primary"><%= __('save') %></button>
+                            <a href="\" type="button" class="btn btn-secondary" ><%= __('cancel') %></a>
+                        </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

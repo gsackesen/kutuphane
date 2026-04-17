@@ -82,7 +82,20 @@
   "userdeletefail":"error:User account not deleted.",
   "areyousuredelete":"Are you sure to delete user account?",
   "confirmdelete":"Confirm Delete",
-  "notauthrized":"Opps, User not authrized to access"
+  "notauthrized":"Opps, User not authrized to access",
+  "kitapekle":"Add New Book",
+  "kitapadi": "Book Name",
+  "yazaradi":"Author",
+  "yayinevi":"Publisher",
+  "kategori":"Category",
+  "dil":"Language",
+  "notes":"Notes",
+  "coverpic":"Cover Picture",
+  "kitapduzenle":"Edit Book",
+  "deletebook":"Delete Book",
+  "areyousuredeletebook":"Are you sure to DELETE book?",
+  "details":"Details"
+
 
 
 

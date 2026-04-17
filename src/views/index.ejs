@@ -1,117 +1,51 @@
 
-    <main>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-      <div class="container"  >    
+<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+  <!-- Overlay -->
+  <div class="overlay"></div>
 
-        <div class="row" >
-
-          <div class="col-auto">
-
-            <div class="card" style="width: 18rem; margin-top: 2rem;" >
-              <img src="/uploads/covers/Empty_Default.jpg" class="card-img-top cover-img" alt="...">
-              <div class="card-body">
-                <h4 class="card-title">Kitap Adı</h4>
-                <h5 class="card-title">Yazar Adı</h5>                  
-                <p class="card-text">Kısa konu</p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Tür</li>
-                <li class="list-group-item">Yayın Evi</li>
-                <li class="list-group-item">ISBN</li>
-              </ul>
-              <div class="d-inline-flex gap-2 justify-content-md-end">
-                <button class = "btn btn--view"><i class="far fa-solid fa-eye" ></i></button>
-                <button class = "btn btn--edit"><i class="far fa-edit" ></i></button>
-              </div>
-            </div>
-          </div>
-        
-
-        <div class="col-auto">
-          <div class="card" style="width: 18rem;margin-top: 2rem;"v>
-            <img src="/uploads/covers/Empty_Default.jpg" class="card-img-top cover-img" alt="...">
-            <div class="card-body">
-              <h4 class="card-title">Kitap Adı</h4>
-              <h5 class="card-title">Yazar Adı</h5>                  
-              <p class="card-text">Kısa konu</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Tür</li>
-              <li class="list-group-item">Yayın Evi</li>
-              <li class="list-group-item">ISBN</li>
-            </ul>
-            <div class="d-inline-flex gap-2 justify-content-md-end">
-              <button class = "btn btn--view"><i class="far fa-solid fa-eye" ></i></button>
-              <button class = "btn btn--edit"><i class="far fa-edit" ></i></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-auto">
-          <div class="card" style="width: 18rem;margin-top: 2rem;">
-            <img src="/uploads/covers/Empty_Default.jpg" class="card-img-top cover-img" alt="...">
-            <div class="card-body">
-              <h4 class="card-title">Kitap Adı</h4>
-              <h5 class="card-title">Yazar Adı</h5>                  
-              <p class="card-text">Kısa konu</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Tür</li>
-              <li class="list-group-item">Yayın Evi</li>
-              <li class="list-group-item">ISBN</li>
-            </ul>
-            <div class="d-inline-flex gap-2 justify-content-md-end">
-              <button class = "btn btn--view"><i class="far fa-solid fa-eye" ></i></button>
-              <button class = "btn btn--edit"><i class="far fa-edit" ></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="card" style="width: 18rem;margin-top: 2rem;">
-            <img src="/uploads/covers/Empty_Default.jpg" class="card-img-top cover-img" alt="...">
-            <div class="card-body">
-              <h4 class="card-title">Kitap Adı</h4>
-              <h5 class="card-title">Yazar Adı</h5>                  
-              <p class="card-text">Kısa konu</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Tür</li>
-              <li class="list-group-item">Yayın Evi</li>
-              <li class="list-group-item">ISBN</li>
-            </ul>
-            <div class="d-inline-flex gap-2 justify-content-md-end">
-              <button class = "btn btn--view"><i class="far fa-solid fa-eye" ></i></button>
-              <button class = "btn btn--edit"><i class="far fa-edit" ></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="col-auto">
-          <div class="card" style="width: 18rem; margin-top: 2rem;">
-            <img src="/uploads/covers/Empty_Default.jpg" class="card-img-top cover-img" alt="...">
-            <div class="card-body">
-              <h4 class="card-title">Kitap Adı</h4>
-              <h5 class="card-title">Yazar Adı</h5>                  
-              <p class="card-text">Kısa konu</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Tür</li>
-              <li class="list-group-item">Yayın Evi</li>
-              <li class="list-group-item">ISBN</li>
-            </ul>
-            <div class="d-inline-flex gap-2 justify-content-md-end">
-              <button class = "btn btn--view"><i class="far fa-solid fa-eye" ></i></button>
-              <button class = "btn btn--edit"><i class="far fa-edit" ></i></button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      </div>
-      
-      
-        
-
-    </main>   
-    
-   
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#bs-carousel" data-slide-to="1"></li>
+    <li data-target="#bs-carousel" data-slide-to="2"></li>
+  </ol>
   
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item slides active">
+      <div class="slide-1"></div>
+      <div class="hero">
+        <hgroup>
+            <h1>We are creatıve</h1>        
+            <h3>Get start your next awesome project</h3>
+        </hgroup>
+      
+      </div>
+    </div>
+    <div class="item slides">
+      <div class="slide-2"></div>
+      <div class="hero">        
+        <hgroup>
+            <h1>We are smart</h1>        
+            <h3>Get start your next awesome project</h3>
+        </hgroup>       
+        
+      </div>
+    </div>
+    <div class="item slides">
+      <div class="slide-3"></div>
+      <div class="hero">        
+        <hgroup>
+            <h1>We are amazing</h1>        
+            <h3>Get start your next awesome project</h3>
+        </hgroup>
+    
+      </div>
+    </div>
+  </div> 
+</div>
