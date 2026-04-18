@@ -18,7 +18,7 @@ router.get('/', authMiddleware.oturumAcilmis, (req, res, next) => {
 });
 
 router.get('/kitapekle',authMiddleware.oturumAcilmis ,roleMiddleware.authorizeRoles('GG_Admin', 'GG_Operator'), mainController.kitapEkleSayfasiniGoster);
-router.post('/kitapekle',authMiddleware.oturumAcilmis,multerConfig.coverUpload.single('cover'),mainController.kitapEkle);
+router.post('/kitapekle',authMiddleware.oturumAcilmis,multerConfig.coverUpload.single('cover'),validatorMiddleware.validateBook(),mainController.kitapEkle);
 
 router.get('/kitapduzenle/:id',authMiddleware.oturumAcilmis,roleMiddleware.authorizeRoles('GG_Admin','GG_Operator'), mainController.editBookFormuGoster);
 router.post('/kitapduzenle/:id',authMiddleware.oturumAcilmis,multerConfig.coverUpload.single('cover'),roleMiddleware.authorizeRoles('GG_Admin', 'GG_Operator'),validatorMiddleware.validateBook(), mainController.editBook);

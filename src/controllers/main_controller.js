@@ -48,28 +48,36 @@ const kitapEkleSayfasiniGoster = async function(req,res,next){
 }
 
 
-const kitapEkle = async function(req, res, next) {
+const kitapEkle = async (req, res, next) => {
+
+  const newBook = new Book({
+    yazaradi: req.body.yazaradi,
+    kitapadi: req.body.kitapadi,
+    cover: req.file ? req.file.filename : null,
+    yayinevi: req.body.yayinevi,
+    kategori: req.body.kategori,
+    dil: req.body.dil,
+    ISBN: req.body.ISBN,
+    notlar: req.body.notlar
+  });
+
+  const hatalar = validationResult(req);
+  console.log(hatalar);
+
+  if (!hatalar.isEmpty()) {
+    req.flash('validation_error', hatalar.array());
+    return res.redirect('/kitapekle');
+  }
+
   try {
-    const newBook = new Book({
-      yazaradi: req.body.yazaradi,
-      kitapadi: req.body.kitapadi,
-      cover: req.file ? req.file.filename : null,
-      yayinevi: req.body.yayinevi,
-      kategori: req.body.kategori,
-      dil: req.body.dil,
-      ISBN: req.body.ISBN,
-      notlar: req.body.notlar
-    });
-
     await newBook.save();
-    //console.log("Yeni kitap eklendi:", newBook);
-
     res.redirect("/");
   } catch (err) {
     console.error("Kitap eklenirken hata:", err);
     next(err);
   }
 };
+
 
 const editBookFormuGoster=async(req,res) => {
     const bookId = req.params.id;
@@ -91,7 +99,7 @@ const editBook = async function(req,res){
         ISBN,
         notlar
     }
-      console.log(guncelBilgiler);
+     
     const hatalar= validationResult(req);
     
        console.log(hatalar);

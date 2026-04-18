@@ -94,8 +94,14 @@
   "kitapduzenle":"Kitap Düzenle",
   "deletebook":"Kitabı Sil",
   "areyousuredeletebook":"Kitap kaydını silmek istediğinizden emin misiniz?",
-  "details":"Detaylar"
+  "details":"Detaylar",
+  "bnameerror1":"Kitap adı en az 3 karakter olmalıdır",
+  "bnameerror2":"Kitap adı en fazla 30 karakter olmalıdır",
+  "bnameerror3":"Yazar adı en az 3 karakter olmalıdır",
+  "bnameerror4":"Yazar adı en fazla 30 karakter olmalıdır",
+  "bnameerror5":"Dil en az 3 karakter olmalıdır",
+  "bnameerror6":"Dil  en fazla 30 karakter olmalıdır",
+  "bnameerror7":"Notlar en fazla 200 karakter olmalıdır"
 
 
-  
-}
+  }

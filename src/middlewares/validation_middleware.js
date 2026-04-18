@@ -31,9 +31,7 @@ const validateNewUser = () => {
 };
 
 const validateEditUser = () => {
-
-
-    
+   
     return[
         body('mail')
             .trim()
@@ -90,25 +88,24 @@ const validateNewPassword = () => {
 
 
 
-
 const validateBook = () => {
     {
          return[
         body('yazaradi')
             .trim()
-            .isLength({min:3}).withMessage('nameerror1')
-            .isLength({max:30}).withMessage('nameerror2'),
+            .isLength({min:3}).withMessage('bnameerror3')
+            .isLength({max:30}).withMessage('bnameerror4'),
         body('kitapadi')
             .trim()
-            .isLength({min:3}).withMessage('nameerror1')
-            .isLength({max:30}).withMessage('nameerror2'),
+            .isLength({min:3}).withMessage('bnameerror1')
+            .isLength({max:30}).withMessage('bnameerror2'),
         body('dil')
             .trim()
-            .isLength({min:3}).withMessage('nameerror1')
-            .isLength({max:30}).withMessage('nameerror2'),
+            .isLength({min:3}).withMessage('bnameerror5')
+            .isLength({max:30}).withMessage('bnameerror6'),
         body('notlar')
             .trim()            
-            .isLength({max:200}).withMessage('nameerror2'),
+            .isLength({max:200}).withMessage('bnameerror7'),
         ];
     };
 };       

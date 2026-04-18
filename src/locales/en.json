@@ -94,8 +94,14 @@
   "kitapduzenle":"Edit Book",
   "deletebook":"Delete Book",
   "areyousuredeletebook":"Are you sure to DELETE book?",
-  "details":"Details"
-
+  "details":"Details",
+  "bnameerror1":"Book name must be min 3 characters",
+  "bnameerror2":"Book name must be max 30 characters",
+  "bnameerror3":"Author name must be min 3 characters",
+  "bnameerror4":"Author name must be max 30 characters",
+  "bnameerror5":"Language must be min 3 characters",
+  "bnameerror6":"Language must be max 30 characters",
+  "bnameerror7":"Notes name must be max 200 characters"
 
 
 
